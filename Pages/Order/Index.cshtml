@@ -13,10 +13,9 @@
     <title>Index</title>
 </head>
 <body>
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
+
 <table class="table">
+    <h1>Current Orders</h1>
     <thead>
         <tr>
             <th>
@@ -50,9 +49,9 @@
                 @Html.DisplayFor(modelItem => item.CarType)
             </td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+                <a class="btn btn-primary" asp-page="./Edit" asp-route-id="@item.ID">Edit</a>               
+                <a class="btn btn-primary" asp-page="./Details" asp-route-id="@item.ID">Details</a>
+                <a class="btn btn-danger" asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
             </td>
         </tr>
 }

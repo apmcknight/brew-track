@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  brew-track:
+    image: ${DOCKER_REGISTRY-}brewtrack
+    build:
+      context: .
+      dockerfile: ./Dockerfile

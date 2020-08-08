@@ -3,6 +3,8 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>brew_track</RootNamespace>
+    <DockerComposeProjectPath>docker-compose.dcproj</DockerComposeProjectPath>
+    <UserSecretsId>52f98c43-4be9-44d9-a7ac-75173efb1ad6</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
