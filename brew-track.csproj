@@ -17,5 +17,6 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.6" />
+    <PackageReference Include="bootstrap" Version="4.5.2" />
   </ItemGroup>
 </Project>
