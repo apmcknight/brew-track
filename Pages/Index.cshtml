@@ -41,6 +41,9 @@
                     <th>
                         @Html.DisplayNameFor(model => model.Orders[0].FirstName)
                     </th>
+                    <td>
+                        @Html.DisplayNameFor(model => model.Orders[0].Status)
+                    </td>
                     <th>
                         @Html.DisplayNameFor(model => model.Orders[0].Items)
                     </th>
@@ -56,90 +59,93 @@
             <tbody>
                 @foreach (var item in Model.Orders)
                 {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.FirstName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Items)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.TableNumber)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.CarType)
-                        </td>
-                        <td>
-                            <!-- EDIT ORDER MODAL, SHOWS AN ALERT TO THE SERVER BEFORE EDITING -->
-                            <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal">
-                                EDIT
-                            </button>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Items)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TableNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CarType)
+                    </td>
+                    <td>
+                        <!-- EDIT ORDER MODAL, SHOWS AN ALERT TO THE SERVER BEFORE EDITING -->
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal">
+                            EDIT
+                        </button>
 
-                            <!-- Modal -->
-                            <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModal" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="editModalLabel">Confirm Order Edit</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <h1>
-                                                Confirm Order Change!
-                                            </h1>
-                                            <p>
-                                                Check with the customer before you edit an open order. If you've already done so, disregard.
-                                            </p>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                            <a class="btn btn-success" asp-page="./Order/Edit" asp-route-id="@item.ID">Confirm &amp; Edit</a>
+                        <!-- Modal -->
+                        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModal" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="editModalLabel">Confirm Order Edit</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <h1>
+                                            Confirm Order Change!
+                                        </h1>
+                                        <p>
+                                            Check with the customer before you edit an open order. If you've already done so, disregard.
+                                        </p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                        <a class="btn btn-success" asp-page="./Order/Edit" asp-route-id="@item.ID">Confirm &amp; Edit</a>
 
-                                        </div>
                                     </div>
                                 </div>
                             </div>
+                        </div>
 
-                            <!-- DELETE ORDER MODAL, ASKS THE SERVER IF THEY WANT TO CANCEL THE ORDER. -->
+                        <!-- DELETE ORDER MODAL, ASKS THE SERVER IF THEY WANT TO CANCEL THE ORDER. -->
 
-                            <a class="btn btn-primary" asp-page="./Order/Details" asp-route-id="@item.ID">Details</a>
+                        <a class="btn btn-primary" asp-page="./Order/Details" asp-route-id="@item.ID">Details</a>
 
-                            <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
-                                DELETE
-                            </button>
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
+                            DELETE
+                        </button>
 
-                            <!-- Modal -->
-                            <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModal" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="deleteModal">Confirm Removal</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <h1>
-                                                Are you sure you want to delete this order?
-                                            </h1>
-                                            <p>
-                                                You won't be able to undo this action.
-                                            </p>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                            <a class="btn btn-danger" asp-page="./Order/Delete" asp-route-id="@item.ID">Delete</a>
+                        <!-- Modal -->
+                        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModal" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="deleteModal">Confirm Removal</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <h1>
+                                            Are you sure you want to delete this order?
+                                        </h1>
+                                        <p>
+                                            You won't be able to undo this action.
+                                        </p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                        <a class="btn btn-danger" asp-page="./Order/Delete" asp-route-id="@item.ID">Delete</a>
 
-                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </td>
-                    </tr>
+                        </div>
+                    </td>
+                </tr>
                 }
             </tbody>
         </table>
