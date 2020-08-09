@@ -5,12 +5,37 @@
 }
 
     <div class="text-left">
-        <div class="jumbotron">
-            <h1>Good, Evening!</h1>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>Notice:</strong> You are running a development deployment. To use a production enviroment,
+            clone the production branch. Or <a href="https://www,mcknight.digital">get in touch</a>, for intergration options.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+        <div class="jumbotron text-center">
+            <script>
+                function greeting() {
+                    let day = new Date();
+                    let hour = day.getHours();
+
+                    if (hour >= 23 && hour < 11) {
+                        return ("Good Morning")
+                    } if (hour >= 12 && hour < 17) {
+                        return ("Good Afternoon!")
+                    } if (hour >= 18 && hour < 24) {
+                        return("Good Evening!")
+                    } else {
+                        return ("Hello, There!")
+                      }
+                }
+
+                document.write("<h1>" + greeting() + "</h1>");
+            </script>
         </div>
 
         <table class="table">
-            <h1>Current Orders</h1>
+            <h1>Open Orders</h1>
             <thead>
                 <tr>
                     <th>
@@ -45,20 +70,54 @@
                             @Html.DisplayFor(modelItem => item.CarType)
                         </td>
                         <td>
-                            <a class="btn btn-primary" asp-page="./Edit" asp-route-id="@item.ID">Edit</a>
-                            <a class="btn btn-primary" asp-page="./Details" asp-route-id="@item.ID">Details</a>
+                            <!-- EDIT ORDER MODAL, SHOWS AN ALERT TO THE SERVER BEFORE EDITING -->
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal">
+                                EDIT
+                            </button>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModal" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="editModalLabel">Confirm Order Edit</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <h1>
+                                                Confirm Order Change!
+                                            </h1>
+                                            <p>
+                                                Check with the customer before you edit an open order. If you've already done so, disregard.
+                                            </p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                            <a class="btn btn-success" asp-page="./Order/Edit" asp-route-id="@item.ID">Confirm &amp; Edit</a>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- DELETE ORDER MODAL, ASKS THE SERVER IF THEY WANT TO CANCEL THE ORDER. -->
+
+                            <a class="btn btn-primary" asp-page="./Order/Details" asp-route-id="@item.ID">Details</a>
 
                             <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
+                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
                                 DELETE
                             </button>
 
                             <!-- Modal -->
-                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModal" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Confirm Removal</h5>
+                                            <h5 class="modal-title" id="deleteModal">Confirm Removal</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
@@ -79,7 +138,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <!--<a class="btn btn-danger" asp-page="./Delete" asp-route-id="@item.ID">Delete</a>-->
                         </td>
                     </tr>
                 }
