@@ -27,6 +27,17 @@
                 <span asp-validation-for="Orders.FirstName" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Orders.Status" class="control-label"></label>
+                <select asp-for="Orders.Status" class="form-control" id="status-selector">
+                    <option>New Order</option>
+                    <option>Preparing</option>
+                    <option>Cooking in Progress</option>
+                    <option>Finished, Ready to Serve</option>
+                    <option>Served to Table</option>
+                </select>
+                <span asp-validation-for="Orders.Status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Orders.Items" class="control-label"></label>
                 <input asp-for="Orders.Items" class="form-control" />
                 <span asp-validation-for="Orders.Items" class="text-danger"></span>
